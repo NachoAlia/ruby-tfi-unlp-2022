@@ -1,0 +1,6 @@
+<h1>Index</h1>
+<%=button_to 'Ver perfil', '/welcome/profile',method: :get%>
+<%=button_to 'logout', '/users/sign_out', method: :delete%>
+<% if can? :profile, :welcome %>
+  <%= link_to 'welcome', '/welcome/profile', method: :get%>
+<% end %>
