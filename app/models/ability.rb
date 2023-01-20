@@ -9,8 +9,10 @@ class Ability
       can :manage, :all
     elsif user.staff?
       can [:index, :profile], :welcome
+      #can [:index], :sucursal
     else
       can [:index, :profile], :welcome
+      #can [:index, :new, :create, :show, :destroy, :edit, :update], :sucursal
     end
 
 

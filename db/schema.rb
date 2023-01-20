@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_29_211021) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_13_024535) do
+  create_table "sucursals", force: :cascade do |t|
+    t.string "nombre", default: "", null: false
+    t.string "direccion", default: "", null: false
+    t.string "telefono", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["nombre"], name: "index_sucursals_on_nombre", unique: true
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -20,8 +29,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_29_211021) do
     t.string "role", default: "client", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "sucursal_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["sucursal_id"], name: "index_users_on_sucursal_id"
   end
 
+  add_foreign_key "users", "sucursals"
 end

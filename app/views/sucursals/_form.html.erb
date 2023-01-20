@@ -1,0 +1,33 @@
+<%= form_with model: @sucursal do |form| %>
+  <div>
+    <% @sucursal.errors.full_messages_for(:nombre).each do |message| %>
+      <div style="color:red;"><%= message %></div>
+    <% end %>
+    <br>
+    <%= form.label :nombre %><br>
+    <%= form.text_field :nombre %>
+  </div>
+  <div>
+    <% @sucursal.errors.full_messages_for(:direccion).each do |message| %>
+      <br>
+      <div style="color:red;"><%= message %></div>
+    <% end %>
+    <br>
+    <%= form.label :direccion %><br>
+    <%= form.text_field :direccion %>
+  </div>
+  <div>
+    <% @sucursal.errors.full_messages_for(:telefono).each do |message| %>
+
+      <div style="color:red;"><%= message %></div>
+    <% end %>
+    <br>
+    <%= form.label :telefono %><br>
+    <%= form.text_field :telefono %>
+  </div>
+<br>
+  <div>
+    <%= form.submit "Accept", class:'form_submit'%>
+  </div>
+<% end %>
+<%= button_to "Go Back", sucursals_path, method: :get %>

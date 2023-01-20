@@ -1,0 +1,19 @@
+<h1>Sucursals</h1>
+<p>Number of branches: <%=@sucursals.count%></p>
+<%= link_to 'New', new_sucursal_path%>
+<%= link_to 'Go Back', welcome_index_path%>
+<ul>
+  <% @sucursals.each do |sucursal| %>
+    <li><%=sucursal.nombre%></li>
+    <li><%=sucursal.direccion%></li>
+    <li><%=sucursal.telefono%></li>
+    <li>
+      <%= link_to "Show", sucursal %>
+    </li>
+    <li><%= link_to "Edit", edit_sucursal_path(sucursal) %></li>
+    <li>
+      <%= link_to "Delete", sucursal_path(sucursal), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}%>
+    </li>
+    <hr />
+  <% end %>
+</ul>
