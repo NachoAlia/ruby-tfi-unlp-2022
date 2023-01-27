@@ -3,6 +3,27 @@
     <li>Name: <%=@sucursal.nombre%></li>
     <li>Address: <%=@sucursal.direccion%></li>
     <li>Phone Number: <%=@sucursal.telefono%></li>
-      <%= link_to 'Go Back', sucursals_path%>
+    <li>
+      <%if @sucursal.schedules.count == 0%>
+        <h3>No schedules found</h3>
+      <%else%>
+      <h3>Schedules:</h3>
+
+      <ul>
+        <%@sucursal.sortSchedules.each do |schedule|%>
+        <li>
+          <%="#{schedule.dayToStr} from #{schedule.startToStr} to #{schedule.endToStr}" %>
+          |
+          <%= link_to 'Edit', edit_sucursal_schedule_path(id:schedule.id, sucursal_id:@sucursal.id)%>
+          <%= link_to 'Delete', sucursal_schedule_path(id:schedule.id, sucursal_id:@sucursal.id), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}%>
+
+        </li>
+        <%end%>
+      </ul>
+      <%end%>
+    </li>
+    <br>
+    <%= link_to 'Go Back', sucursals_path%>
+    <%= link_to 'Create new schedule', new_sucursal_schedule_path(sucursal_id:@sucursal.id)%>
     <hr />
 </ul>

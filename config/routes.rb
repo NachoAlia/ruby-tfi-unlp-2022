@@ -16,8 +16,10 @@ Rails.application.routes.draw do
   get 'welcome/index'
   get 'welcome/profile'
   #sucursal--
-  resources :sucursals
-  
+  resources :sucursals do
+    resources :schedules 
+  end
+
   #admin--
   #staff--
   #turno--

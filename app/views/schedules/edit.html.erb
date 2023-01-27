@@ -1,0 +1,31 @@
+<h1>edit schedule</h1>
+<%= form_with model: [ @sucursal, @schedule ] do |form| %>
+  <div>
+    <%= form.label :day %><br>
+    <%= form.select :day,
+      [["Monday", 0],
+      ["Tuesday", 1],
+      ["Wednesday", 2],
+      ["Thursday", 3],
+      ["Friday", 4]]
+    %>
+  </div>
+  <div>
+    <%= form.label :start %><br>
+    <%=form.time_field :start_time,
+      min: '00:00:00',
+      max: '12:00:00'
+    %>
+  </div>
+  <div>
+    <%= form.label :end %><br>
+    <%=form.time_field :end_time,
+      min: '00:00:00',
+      max: '23:59:59'
+    %>
+  <p>
+    <%= form.submit %>
+  </p>
+  </div>
+<% end %>
+<%= button_to "Go back", sucursal_path(@sucursal), method: :get%>

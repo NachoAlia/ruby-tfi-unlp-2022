@@ -12,7 +12,8 @@ class Ability
       #can [:index], :sucursal
     else
       can [:index, :profile], :welcome
-      #can [:index, :new, :create, :show, :destroy, :edit, :update], :sucursal
+      can [:index, :new, :create, :show, :destroy, :edit, :update], :sucursal
+      can [:new], :schedule
     end
 
 

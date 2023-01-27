@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_13_024535) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_24_042005) do
+  create_table "schedules", force: :cascade do |t|
+    t.integer "sucursal_id"
+    t.integer "day", default: 1, null: false
+    t.time "start_time", default: "2000-01-01 00:00:00", null: false
+    t.time "end_time", default: "2000-01-01 00:00:00", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["day", "sucursal_id"], name: "index_schedules_on_day_and_sucursal_id", unique: true
+    t.index ["sucursal_id"], name: "index_schedules_on_sucursal_id"
+  end
+
   create_table "sucursals", force: :cascade do |t|
     t.string "nombre", default: "", null: false
     t.string "direccion", default: "", null: false
@@ -35,5 +46,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_024535) do
     t.index ["sucursal_id"], name: "index_users_on_sucursal_id"
   end
 
+  add_foreign_key "schedules", "sucursals"
   add_foreign_key "users", "sucursals"
 end
