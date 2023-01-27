@@ -1,13 +1,22 @@
 class Schedule < ApplicationRecord
   belongs_to :sucursal
+  validates_uniqueness_of :day, scope: :sucursal_id, message:"Day exist"
   validates :day, :start_time, :end_time, :sucursal_id, presence:true
   validates :day, :inclusion => 0..4
-  validates :start_time, absence:true unless -> { isValidTime?(:start_time) }
-  validates :end_time, absence:true unless -> { isValidTime?(:end_time) }
+  validate :start_time, :timeValid?
 
-  def isValidTime?(aTime)
-    aTime == "Time" and
-    aTime.strftime("%H:%M").between(Time.zone.parse("00:00"), Time.zone.parse("23:59"))
+  # def formatTimeValid?(aTime)
+  #   aTime == "Time" and
+  #   aTime.strftime("%H:%M").between(Time.zone.parse("00:00"), Time.zone.parse("23:59"))
+  # end
+
+  def timeValid?
+    unless validStart?
+      self.errors.add(:start_time, "Invalid time")
+    end
+  end
+  def validStart?
+    self.start_time.to_i < self.end_time.to_i
   end
 
   def dayToStr
