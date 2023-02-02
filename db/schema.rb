@@ -10,7 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_24_042005) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_27_231517) do
+  create_table "appointments", force: :cascade do |t|
+    t.integer "sucursal_id"
+    t.integer "client_id"
+    t.integer "staff_id"
+    t.date "appointment_date", null: false
+    t.time "appointment_time", default: "2000-01-01 00:00:00", null: false
+    t.integer "state", default: 0, null: false
+    t.string "comment", default: "", null: false
+    t.string "reason", default: "", null: false
+    t.boolean "deleted", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_appointments_on_client_id"
+    t.index ["staff_id"], name: "index_appointments_on_staff_id"
+    t.index ["sucursal_id"], name: "index_appointments_on_sucursal_id"
+  end
+
   create_table "schedules", force: :cascade do |t|
     t.integer "sucursal_id"
     t.integer "day", default: 1, null: false
@@ -46,6 +63,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_24_042005) do
     t.index ["sucursal_id"], name: "index_users_on_sucursal_id"
   end
 
+  add_foreign_key "appointments", "sucursals"
+  add_foreign_key "appointments", "users", column: "client_id"
+  add_foreign_key "appointments", "users", column: "staff_id"
   add_foreign_key "schedules", "sucursals"
   add_foreign_key "users", "sucursals"
 end

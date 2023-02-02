@@ -2,7 +2,7 @@ class Schedule < ApplicationRecord
   belongs_to :sucursal
   validates_uniqueness_of :day, scope: :sucursal_id, message:"Day exist"
   validates :day, :start_time, :end_time, :sucursal_id, presence:true
-  validates :day, :inclusion => 0..4
+  validates :day, :inclusion => 1..6
   validate :start_time, :timeValid?
 
   # def formatTimeValid?(aTime)
@@ -29,15 +29,31 @@ class Schedule < ApplicationRecord
     self.formatTime(self.end_time)
   end
 
+  def generateForAppointment
+    schedules = []
+    current = self.start_time
+    while current < self.end_time do
+      schedules << self.formatTime(current)
+      schedules << self.formatTime(current + (60*60/2))
+      current = (current + (60*60))
+    end
+    return schedules
+  end
+
+  def containDay(day)
+    self.day == day
+  end
+
   private
   def daysOfTeWeek
-    [ "Monday",
+    [
+      "Sunday",
+      "Monday",
       "Tuesday",
       "Wednesday",
       "Thursday",
       "Friday",
-      "Saturday",
-      "Sunday"
+      "Saturday"
     ]
   end
   def formatTime(aTime)

@@ -1,13 +1,16 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :appointments, dependent: :restrict_with_error
   belongs_to :sucursal, optional:true
+  
   validates :sucursal_id, absence: true, unless: :isStaff?
   validates :sucursal_id, absence: true, unless: :sucursal_id_exists?
+
+
 
   def admin?
     self.role == 'admin'

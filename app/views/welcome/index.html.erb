@@ -1,6 +1,14 @@
-<h1>Index</h1>
-<%=button_to 'Ver perfil', '/welcome/profile',method: :get%>
-<%=button_to 'logout', '/users/sign_out', method: :delete%>
+<h1>Bank shift management</h1>
+
+<br />
 <% if can? :profile, :welcome %>
-  <%= link_to 'welcome', '/welcome/profile', method: :get%>
+  <%= button_to 'Profile', '/welcome/profile', method: :get%>
 <% end %>
+<br />
+<% if can? :index, :sucursal %>
+  <%= button_to 'Branches', sucursals_path, method: :get%>
+<% end %>
+<br />
+<%= button_to 'Appointments', client_appointments_path(id:current_user.id), method: :get%>
+<br />
+<%=button_to 'logout', '/users/sign_out', method: :delete%>

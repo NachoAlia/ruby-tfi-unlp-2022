@@ -17,8 +17,12 @@ Rails.application.routes.draw do
   get 'welcome/profile'
   #sucursal--
   resources :sucursals do
-    resources :schedules 
+    resources :schedules
+    resources :appointments
   end
+
+  get '/appointments/client_appointments/:id',
+  to: 'appointments#client_appointments', as: 'client_appointments'
 
   #admin--
   #staff--

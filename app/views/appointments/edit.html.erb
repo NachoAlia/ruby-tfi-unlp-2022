@@ -1,0 +1,36 @@
+<h2>Edit schedule</h2>
+
+<%= form_with model: [ @sucursal, @appointment ], method: :patch do |form| %>
+  <fieldset class="contents">
+    <%
+    date = @appointment2.appointment_date if !@appointment2.appointment_date.nil?
+    date = @appointment.appointment_date if @appointment2.appointment_date.nil?
+
+    %>
+
+    <%= form.label :appointment_date %><br>
+    <%= form.date_select :appointment_date,
+      start_year: Time.now.year,
+      end_year: Time.now.year,
+      start_month: Time.now.month,
+      selected: date
+
+    %>
+  </fieldset>
+  <button formmethod="get" formaction="<%edit_sucursal_appointment_path%>">Select day</button>
+  <br>
+  <div>
+    <fieldset class="contents">
+       <%= form.label :appointment_time %><br>
+       <%=form.select :appointment_time, @sucursal.getSchedulesForAppointmentDate(date)%>
+    </fieldset>
+  </div>
+  <div>
+    <%= form.label :reason %><br>
+    <%=form.text_area :reason %>
+  </div>
+  <div>
+    <%= form.submit "Edit" %>
+  </div>
+<% end %>
+<%= button_to 'Go back', client_appointments_path(id:current_user.id), method: :get%>

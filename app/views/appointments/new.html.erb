@@ -1,0 +1,42 @@
+<h2>Create schedule</h2>
+<h3>Turnos ocupados</h3>
+<ul>
+  <%@sucursal.appointments.each do |appointment|%>
+  <li>
+    <%="Date: #{appointment.appointment_date}"%>
+    <%="Initial time: #{appointment.appointment_time.strftime("%H:%M")}"%>
+    <%="Final time: #{((appointment.appointment_time)+(60*60/2)).strftime("%H:%M")}"%>
+
+  </li>
+  <%end%>
+</ul>
+
+<%= form_with model: [ @sucursal, @sucursal.appointments.build ] do |form| %>
+  <fieldset class="contents">
+    <%= form.label :appointment_date %><br>
+    <%= form.date_select :appointment_date,
+      start_year: Time.now.year,
+      end_year: Time.now.year,
+      start_month: Time.now.month,
+      start_day:Time.now.day,
+      selected: @appointment.appointment_date
+
+    %>
+  </fieldset>
+  <button formmethod="get" formaction="<%new_sucursal_appointment_path%>">Select day</button>
+  <br>
+  <div>
+    <fieldset class="contents">
+       <%= form.label :appointment_time %><br>
+       <%=form.select :appointment_time, @sucursal.getSchedulesForAppointmentDate(@appointment.appointment_date)%>
+    </fieldset>
+  </div>
+  <div>
+    <%= form.label :reason %><br>
+    <%=form.text_area :reason %>
+  </div>
+  <div>
+    <%= form.submit "create"%>
+  </div>
+<% end %>
+<%= button_to "Go back", sucursals_path, method: :get%>

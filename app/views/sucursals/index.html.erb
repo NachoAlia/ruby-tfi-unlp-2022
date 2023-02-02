@@ -14,6 +14,9 @@
     <li>
       <%= link_to "Delete", sucursal_path(sucursal), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}%>
     </li>
+    <li>
+      <%= link_to "Get appointment", new_sucursal_appointment_path(sucursal_id:sucursal.id)%>
+    </li>
     <hr />
   <% end %>
 </ul>
