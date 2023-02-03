@@ -1,0 +1,14 @@
+<h1>Staff appointments <%=@appointments.count%></h1>
+<%= link_to 'Go Back', welcome_index_path%>
+<ul>
+  <% @appointments.each do |appointment| %>
+    <li>Branch name: <%=appointment.sucursal.nombre%></li>
+    <li>Date: <%=appointment.appointment_date%></li>
+    <li>Time: <%=appointment.appointment_time.strftime("%H:%M")%></li>
+    <li>Reason: <%=appointment.reason%></li>
+    <li>State: <%=appointment.state_to_s%></li>
+    <p style= "font-weight:bold">Options:</p>
+    <li><%= link_to "Serve this appointment", edit_serve_path(id:appointment.id, sucursal_id:appointment.sucursal.id)%></li>
+
+    <hr />
+  <% end %>

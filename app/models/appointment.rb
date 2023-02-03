@@ -19,12 +19,23 @@ class Appointment < ApplicationRecord
             presence:true
 
   validate :appointment_time, :timeForAppointmentValid?
+
   before_destroy :can_destroy?, prepend: true
-  before_update :can_destroy?, prepend: true
+  validate :state, :can_destroy?, on: :update
+
+
+  def can_serve?
+    @aux = Appointment.find_by_id(self.id)
+    if self.comment.blank? or !@aux.staff_id.blank? or !@aux.state.equal?0 #or @app.state.equal?1)
+        self.errors.add(:base, "Error on served ")
+        return false
+    end
+    return true
+  end
 
   def can_destroy?
     unless self.state.equal? 0
-      self.errors.add(:state, "This appointment has been served")
+      self.errors.add(:base, "This appointment has been served")
       throw :abort
     end
   end

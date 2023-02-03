@@ -1,0 +1,17 @@
+<h2>Serve appointment</h2>
+<div data-turbo="false">
+<%= form_with url: update_serve_path(id:@appointment.id, sucursal_id:@sucursal.id), local:true do |form| %>
+  <div>
+    <%= form.label :comment %><br>
+    <%=form.text_area :comment %>
+  </div>
+  <div>
+
+    <%=form.hidden_field :state, value:1%>
+  </div>
+  <div>
+    <%= form.submit "Serve"%>
+  </div>
+<% end %>
+</div>
+<%= button_to "Go back", staff_appointments_path(id:current_user.id), method: :get%>

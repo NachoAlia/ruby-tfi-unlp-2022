@@ -23,13 +23,14 @@ Rails.application.routes.draw do
 
   get '/appointments/client_appointments/:id',
   to: 'appointments#client_appointments', as: 'client_appointments'
+  get '/appointments/staff_appointments/:id',
+  to: 'appointments#staff_appointments', as: 'staff_appointments'
+  get '/sucursals/:sucursal_id/appointments/:id/edit_serve',
+  to: 'appointments#edit_serve', as: 'edit_serve'
+  post '/sucursals/:sucursal_id/appointments/:id/update_serve',
+  to: 'appointments#update_serve', as: 'update_serve'
 
-  #admin--
-  #staff--
-  #turno--
-  #horario--
-
-
+  get '*unmatched_route', to: 'application#raise_not_found'
 
 
 end
