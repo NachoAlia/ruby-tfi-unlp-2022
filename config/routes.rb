@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   #index--
   get 'welcome/index'
   get 'welcome/profile'
+  get 'welcome/another_profile/:id', to:'welcome#another_profile', as:'another_profile'
   #sucursal--
   resources :sucursals do
     resources :schedules

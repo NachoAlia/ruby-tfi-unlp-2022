@@ -8,11 +8,11 @@ class Ability
     if user.admin?
       can :manage, :all
     elsif user.staff?
-      can [:index, :profile], :welcome
+      can [:index, :profile, :another_profile], :welcome
       can [:index, :show], :sucursal
       #can [:index], :sucursal
     else
-      can [:index, :profile], :welcome
+      can [:index, :profile, :another_profile], :welcome
       can [:index, :create, :show, :destroy, :edit, :update], :sucursal
       can [:new], :schedule
       can [:new, :create, :client_appointments], :appointment

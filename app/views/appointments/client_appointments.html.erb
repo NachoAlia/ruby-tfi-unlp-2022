@@ -7,6 +7,10 @@
     <li>Time: <%=appointment.appointment_time.strftime("%H:%M")%></li>
     <li>Reason: <%=appointment.reason%></li>
     <li>State: <%=appointment.state_to_s%></li>
+    <%if appointment.state.equal?1%>
+      <li>Bank staff:<%= link_to "#{appointment.staff.email}", another_profile_path(id:appointment.client.id)%></li>
+      <li>Comment: <%=appointment.comment%></li>
+    <%end%>
     <p style= "font-weight:bold">Options:</p>
     <li><%= link_to "Edit this appointment", edit_sucursal_appointment_path(id:appointment.id, sucursal_id:appointment.sucursal.id)%></li>
     <li>
