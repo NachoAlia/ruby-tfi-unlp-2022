@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   def raise_not_found
     raise ActionController::RoutingError.new("No route matches #{params[:unmatched_route]}")
   end
-
+  
   def not_found
     redirect_to root_url, alert:"This route not exist"
   end

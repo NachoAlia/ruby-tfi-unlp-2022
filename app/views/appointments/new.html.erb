@@ -1,12 +1,14 @@
 <h2>Create schedule</h2>
-<h3>Turnos ocupados</h3>
+<h3>Schedules from this branch</h3>
 <ul>
-  <%@sucursal.appointments.each do |appointment|%>
+  <%@sucursal.sortSchedules.each do |schedule|%>
   <li>
-    <%="Date: #{appointment.appointment_date}"%>
-    <%="Initial time: #{appointment.appointment_time.strftime("%H:%M")}"%>
-    <%="Final time: #{((appointment.appointment_time)+(60*60/2)).strftime("%H:%M")}"%>
-
+    <%="#{schedule.dayToStr} from #{schedule.startToStr} to #{schedule.endToStr}" %>
+    <% if can? [:edit, :destroy], :schedule %>
+      |
+      <%= link_to 'Edit', edit_sucursal_schedule_path(id:schedule.id, sucursal_id:@sucursal.id)%>
+      <%= link_to 'Delete', sucursal_schedule_path(id:schedule.id, sucursal_id:@sucursal.id), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}%>
+    <% end %>
   </li>
   <%end%>
 </ul>

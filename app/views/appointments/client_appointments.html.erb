@@ -8,7 +8,7 @@
     <li>Reason: <%=appointment.reason%></li>
     <li>State: <%=appointment.state_to_s%></li>
     <%if appointment.state.equal?1%>
-      <li>Bank staff:<%= link_to "#{appointment.staff.email}", another_profile_path(id:appointment.client.id)%></li>
+      <li>Bank staff:<%= link_to "#{appointment.staff.email}", another_profile_path(id:appointment.staff.id)%></li>
       <li>Comment: <%=appointment.comment%></li>
     <%end%>
     <p style= "font-weight:bold">Options:</p>

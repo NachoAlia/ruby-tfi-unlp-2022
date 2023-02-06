@@ -9,10 +9,17 @@
   <%= button_to 'Branches', sucursals_path, method: :get%>
 <% end %>
 <br />
-<%= button_to 'Appointments', client_appointments_path(id:current_user.id), method: :get%>
+<% if can? :client_appointments, :appointment %>
+  <%= button_to 'Appointments', client_appointments_path(id:current_user.id), method: :get%>
+<% end %>
 <br />
-<%= button_to 'Branch Appointments', staff_appointments_path(id:current_user.id), method: :get%>
+<% if can? :staff_appointments, :appointment %>
+  <%= button_to 'Branch Appointments', staff_appointments_path(id:current_user.id), method: :get%>
+<% end %>
 <br />
-<%= button_to 'Admin Panel', admins_path, method: :get%>
+<% if can? :index, :admin %>
+  <%= button_to 'Admin Panel', admins_path, method: :get%>
+<% end %>
+
 <br />
 <%=button_to 'logout', '/users/sign_out', method: :delete%>

@@ -1,6 +1,6 @@
 class AppointmentsController < ApplicationController
-  # authorize_resource :class => false
-  # before_action :authenticate_user!
+  authorize_resource :class => false
+  before_action :authenticate_user!
   def new
     @sucursal = Sucursal.find_by_id(params[:sucursal_id])
     @appointment = Appointment.new(appointment_params)
@@ -46,12 +46,10 @@ class AppointmentsController < ApplicationController
     end
   end
 
-
   def edit_serve
     @sucursal = Sucursal.find_by_id(params[:sucursal_id])
     @appointment = Appointment.find_by_id(params[:id])
   end
-
 
   def update_serve
     @appointment = Appointment.find_by_id(params[:id])

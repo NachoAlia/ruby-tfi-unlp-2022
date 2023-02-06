@@ -7,17 +7,16 @@ class Ability
 
     if user.admin?
       can :manage, :all
+      cannot :manage, :appointment
     elsif user.staff?
       can [:index, :profile, :another_profile], :welcome
       can [:index, :show], :sucursal
-      #can [:index], :sucursal
+      can [:staff_appointments, :edit_serve, :update_serve], :appointment
       #can [:index], :admin
     else
       can [:index, :profile, :another_profile], :welcome
-      can [:index, :create, :show, :destroy, :edit, :update], :sucursal
-      can [:new], :schedule
-      can [:new, :create, :client_appointments], :appointment
-      #can [:index], :admin
+      can [:index, :show], :sucursal
+      can [:new, :create, :edit, :update, :destroy, :client_appointments], :appointment
     end
 
 

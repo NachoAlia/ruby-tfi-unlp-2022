@@ -1,5 +1,17 @@
 <h2>Edit schedule</h2>
-
+<h3>Schedules from this branch:</h3>
+<ul>
+  <%@sucursal.sortSchedules.each do |schedule|%>
+  <li>
+    <%="#{schedule.dayToStr} from #{schedule.startToStr} to #{schedule.endToStr}" %>
+    <% if can? [:edit, :destroy], :schedule %>
+      |
+      <%= link_to 'Edit', edit_sucursal_schedule_path(id:schedule.id, sucursal_id:@sucursal.id)%>
+      <%= link_to 'Delete', sucursal_schedule_path(id:schedule.id, sucursal_id:@sucursal.id), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}%>
+    <% end %>
+  </li>
+  <%end%>
+</ul>
 <%= form_with model: [ @sucursal, @appointment ], method: :patch do |form| %>
   <fieldset class="contents">
     <%

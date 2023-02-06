@@ -1,5 +1,6 @@
 class SchedulesController < ApplicationController
-  
+  authorize_resource :class => false
+  before_action :authenticate_user!
   def new
     @sucursal = Sucursal.find_by_id(params[:sucursal_id])
     @schedule = Schedule.new
