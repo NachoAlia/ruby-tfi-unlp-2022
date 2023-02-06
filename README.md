@@ -1,5 +1,5 @@
 # ER:
-https://github.com/NachoAlia/ruby-tfi-unlp-2022/blob/main/app/assets/images/image1.png
+![alt text](https://github.com/NachoAlia/ruby-tfi-unlp-2022/blob/main/app/assets/images/image1.png?raw=true)
 
 # Required Installations:
 ```
