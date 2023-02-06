@@ -1,0 +1,30 @@
+<h1>Edit user</h1>
+<br>
+<%= form_with url: admins_update_user_path(id:@user.id), local:true   do |form| %>
+  <div>
+    <%= form.label :email %><br>
+    <%= form.text_field :email, value:@user.email %>
+  </div>
+  <div>
+    <%= form.label :password %><br>
+    <%= form.text_field :password %>
+  </div>
+  <div>
+    <%= form.label :password_confirmation %><br>
+    <%= form.text_field :password_confirmation%>
+  </div>
+  <br>
+  <div>
+    <%= form.label :role %><br>
+    <%= form.select(:role, [['Admin','admin'],['Staff','staff'],['Client','client']], selected:@user.role) %>
+  </div>
+  <div>
+    <%= form.label :sucursal %><br>
+    <%= form.select(:sucursal, @sucursals.ids, include_blank:true, selected:@user.sucursal_id) %>
+  </div>
+<br>
+  <div>
+    <%= form.submit "Accept", class:'form_submit'%>
+  </div>
+<% end %>
+<%= button_to "Go Back", :back, method: :get %>

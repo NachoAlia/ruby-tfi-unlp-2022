@@ -11,11 +11,13 @@ class Ability
       can [:index, :profile, :another_profile], :welcome
       can [:index, :show], :sucursal
       #can [:index], :sucursal
+      #can [:index], :admin
     else
       can [:index, :profile, :another_profile], :welcome
       can [:index, :create, :show, :destroy, :edit, :update], :sucursal
       can [:new], :schedule
       can [:new, :create, :client_appointments], :appointment
+      #can [:index], :admin
     end
 
 

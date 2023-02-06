@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'admins/index'
 
   devise_for :users
   devise_scope :user do
@@ -33,5 +34,12 @@ Rails.application.routes.draw do
 
   get '*unmatched_route', to: 'application#raise_not_found'
 
-
+  #..Admin
+  get '/admins/index', to:'admins#index', as:'admins'
+  get '/admins/users', to:'admins#users', as:'admins_users'
+  get '/admins/new_user', to:'admins#new_user', as:'admins_new_user'
+  get '/admins/edit_user', to:'admins#edit_user', as:'admins_edit_user'
+  post '/admins/create_user', to:'admins#create_user', as:'admins_create_user'
+  post '/admins/update_user', to:'admins#update_user', as:'admins_update_user'
+  delete '/admins/user_destroy/:id', to:'admins#user_destroy', as:'admins_user_destroy'
 end

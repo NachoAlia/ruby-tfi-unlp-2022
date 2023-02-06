@@ -4,12 +4,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :appointments, dependent: :restrict_with_error
+  #has_many :appointments, dependent: :restrict_with_error
+  has_many :appointments, foreign_key:"client_id", class_name:'Appointment', dependent: :restrict_with_error
+  has_many :appointments_s, foreign_key:"staff_id", class_name:'Appointment', dependent: :restrict_with_error
   belongs_to :sucursal, optional:true
-  
+
   validates :sucursal_id, absence: true, unless: :isStaff?
   validates :sucursal_id, absence: true, unless: :sucursal_id_exists?
-
+  validates :sucursal_id, presence: true, if: :isStaff?
 
 
   def admin?
