@@ -1,4 +1,5 @@
 <h1>Profile</h1>
 <h2>Email: <%=current_user.email%></h2>
 <h2>Rol: <%=current_user.role%></h2>
-<%=button_to 'Change your password', '/users/edit', method: :get%>
+<%=button_to 'Change your password', '/users/edit', method: :get%><br>
+<%=button_to 'Go back', welcome_index_path, method: :get%>

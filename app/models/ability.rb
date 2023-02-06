@@ -12,7 +12,7 @@ class Ability
       can [:index, :profile, :another_profile], :welcome
       can [:index, :show], :sucursal
       can [:staff_appointments, :edit_serve, :update_serve], :appointment
-      #can [:index], :admin
+      can [:index, :clients], :admin
     else
       can [:index, :profile, :another_profile], :welcome
       can [:index, :show], :sucursal

@@ -1,6 +1,12 @@
 <h1>Admin panel</h1>
 <br />
-<%= button_to 'Users', admins_users_path, method: :get%>
+<% if can? :users, :admin %>
+  <%= button_to 'Users', admins_users_path, method: :get%>
+<% end %>
+<br />
+<% if can? :clients, :admin %>
+  <%= button_to 'Clients', admins_clients_path, method: :get%>
+<% end %>
 <br />
 
-<%=button_to 'Go back', :back, method: :get%>
+<%=button_to 'Go back', welcome_index_path, method: :get%>
