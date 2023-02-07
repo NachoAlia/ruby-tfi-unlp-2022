@@ -37,6 +37,6 @@ Rails.application.routes.draw do
   post '/admins/create_user', to:'admins#create_user', as:'admins_create_user'
   post '/admins/update_user', to:'admins#update_user', as:'admins_update_user'
   delete '/admins/user_destroy/:id', to:'admins#user_destroy', as:'admins_user_destroy'
-
+  delete '/admins/user_force_destroy/:id', to:'admins#user_force_destroy', as:'admins_user_force_destroy'
   get '*unmatched_route', to: 'application#raise_not_found'
 end

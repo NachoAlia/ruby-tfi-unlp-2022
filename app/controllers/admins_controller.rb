@@ -54,6 +54,21 @@ class AdminsController < ApplicationController
     end
   end
 
+  def user_force_destroy
+    @user = User.find_by_id(params[:id])
+    if @user.role == "client"
+      Appointment.where("client_id"==@user.id).delete_all
+    else
+      Appointment.where("staff_id"==@user.id).delete_all
+    end
+    if @user.destroy
+      redirect_to admins_users_path, notice:"User deleted successfully"
+    else
+      redirect_to admins_users_path, alert:@user.errors.full_messages.inject("Error: "){ |a, e| a << "#{e}. ";a }
+    end
+  end
+
+
   def clients
     @users = User.where(role:'client')
   end

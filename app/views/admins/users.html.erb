@@ -12,6 +12,9 @@
     <li>
       <%= link_to "Delete", admins_user_destroy_path(id:user.id), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}%>
     </li>
+    <li>
+      <%= link_to "Delete(force)", admins_user_force_destroy_path(id:user.id), data: {turbo_method: :delete, turbo_confirm: 'Are you sure? All the appointments of this user will be deleted, including him.'}%>
+    </li>
     <hr />
   <% end %>
 </ul>
